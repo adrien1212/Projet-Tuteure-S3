@@ -18,5 +18,7 @@ public class testGeneral {
 		
 		System.out.println("bon");
 		System.out.println("push");
+		System.out.println("pushv2");
+
 	}
 }
