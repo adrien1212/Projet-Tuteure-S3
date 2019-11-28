@@ -17,5 +17,6 @@ public class testGeneral {
 		RecupererBalise.recupererFichier("src/test/fichTest.txt");
 		
 		System.out.println("bon");
+		System.out.println("push");
 	}
 }
