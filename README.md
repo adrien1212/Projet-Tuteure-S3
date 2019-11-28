@@ -20,3 +20,4 @@ Dans url saisir : https://github.com/adrien1212/ProjetTuteureS3.git
 Next
 
 Dans directory choisir le chemin du WorkSpace crée en 1)
+**Cocher la case Import ... **
