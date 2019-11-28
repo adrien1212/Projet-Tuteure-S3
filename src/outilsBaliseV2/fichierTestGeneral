@@ -1,0 +1,19 @@
+<cacher>texte balise</cacher>
+<cacher>texte</cacher><cacher>texte</cacher>
+<cacher><g>texte</g></cacher>
+<cacher>texte<g>autre texte</g></cacher>
+<cacher></cacher>
+<cacher>texte<g>autre</g>texte<g>texte</g>autre</cacher>teste<g>autre</g>
+<cacher>
+<cacher>texte
+</cacher>
+</cacher>texte
+</cacher>texte<cacher>
+</cacher><cacher>
+<cacher><g></cacher></g>
+<cacher><g></cacher</g>   //ATTENTION PAS DE '>' après /cacher
+<cacher></g>texte<g></cacher>
+</cacher></g>texte<g></cacher>
+</cacher>texte<g>autre</g><cacher>
+</cacher></cacher>
+<cacher>teste<g>autre</g><cacher>
