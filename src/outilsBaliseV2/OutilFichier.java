@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import balises.Balise;
+import balises.FactoryBalise;
 
 /**
  * 
@@ -21,6 +22,9 @@ import balises.Balise;
  */
 public class OutilFichier {
 
+	/** Lors que l'écriture des balises (cacher pour le moment) nous liront l'arrayList*/
+	public static ArrayList<String> contenuBaliseModifie = new ArrayList<String>();
+	
     /**
      * Remet en forme le fichier source
      * @param fichierSource fichier a remettre en forme
@@ -35,10 +39,18 @@ public class OutilFichier {
             
             PrintWriter ecris = new PrintWriter(new FileWriter("ecris.txt"));
             
-            fichier.readLine(); // premiere ligne inutile
+            ecris.println(fichier.readLine()); // La première ligne permettra la re-écriture
             ligne = fichier.readLine();
+            
+            /* Les caractère '<' et '>' on été remplacé durant la lecture de la ligne,
+             * On remet donc les chevrons pour la suite de l'éxécution
+             */
+            ligne = ligne.replaceAll("&lt;", "<");
+            ligne = ligne.replaceAll("&gt;", ">");
+            
+            //ligne = ligne.replaceAll("â—?", "pointBizzar");
+            
 
-            /* ecriture du fichier */
             for (int i = 0; i < ligne.length(); i++) {
                 
                 if (ligne.charAt(i) == '>') {
@@ -65,7 +77,7 @@ public class OutilFichier {
      * @param fichierSource fichier a lire
      */
     public static void lectureFichier(String fichierSource) {
-        
+    	
         String ligne; // ligne lu dans le fichier
         StringBuilder balise = new StringBuilder();
         
@@ -73,10 +85,10 @@ public class OutilFichier {
         
         try(BufferedReader fichier = new BufferedReader(
                                      new FileReader(fichierSource))) {
-            
+
             while ((ligne = fichier.readLine()) != null) {
                 if ((indiceBalise = Balise.baliseValide(ligne)) != -1 && indiceBalise % 2 == 0) {
-                    
+                	
                     ligne = fichier.readLine(); // on saute la ligne de la balise valide
                     fichier.mark(0);            // on marque la position pour y revenir
                     
@@ -86,6 +98,15 @@ public class OutilFichier {
                     } while (!(ligne = fichier.readLine()).equals(Balise.BALISE.get(indiceBalise+1)));
                     
                     System.out.println(balise.toString()); // TODO traitement balise
+                    
+                    /* On applique les modifications souhaitées à la balise */
+                    FactoryBalise fb = new FactoryBalise();
+                    Balise c = fb.creerBalise("cacher", balise.toString());
+                    c.appliquerModif();
+                    System.out.println(c.toString());
+                    
+                    contenuBaliseModifie.add(c.toString());
+                   
                     balise.delete(0, balise.length());
                     
                     fichier.reset(); // retour a la marque
@@ -106,15 +127,54 @@ public class OutilFichier {
      * @param collectionBalise
      */
     public static void ecrireFichier(ArrayList<Balise> collectionBalise) {
-        
     }
+    
+    
+    /**
+     * TODO commenter le rôle de cette méthode
+     * @param collectionBalise
+     * @throws IOException 
+     */
+    public static void ecrireFichier(String fichierSource, String fichierDestination) throws IOException {
+        
+    	BufferedReader fSource = new BufferedReader(new FileReader(fichierSource));
+    	PrintWriter fDestination = new PrintWriter(new FileWriter(fichierDestination));
+    	
+    	String ligne;
+    	int i = 0; // indice dans l'arrayList contenuBaliseModifie
+    	
+    	fDestination.println(fSource.readLine()); // on écrit la première ligne
+    	
+    	while((ligne = fSource.readLine()) != null) {
+    		if(ligne.equals(Balise.BALISE.get(0))) {
+    			/* Alors c'est la balise <cacher> */
+    			fSource.readLine(); // on lit la ligne du contenu 
+    			fDestination.print(contenuBaliseModifie.get(i));
+    			
+    			fSource.readLine(); // on saute pas la balise fermente
+    		} else {
+    			fDestination.print(ligne);
+    		}
+    		
+    	}
+    	
+    	fSource.close();
+    	fDestination.close();
+    	
+    }
+    
     
     /**
      * TODO commenter le rôle de cette méthode
      * @param args
      */
     public static void main(String[] args) {
-        //corrigeFichier("content.xml");
+        corrigeFichier("content.xml");
         lectureFichier("ecris.txt");
+        try {
+			ecrireFichier("ecris.txt", "content2.xml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }
