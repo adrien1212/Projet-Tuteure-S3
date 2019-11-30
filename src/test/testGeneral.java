@@ -15,10 +15,6 @@ public class testGeneral {
 		OutilsBaliseV2.verifierBalise("src/test/fichTest.txt");
 		
 		RecupererBalise.recupererFichier("src/test/fichTest.txt");
-		
-		System.out.println("bon");
-
-		System.out.println("pushv2");
 
 	}
 }

@@ -3,6 +3,7 @@ package outilsBaliseV2;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 import balises.Balise;
 import balises.Cacher;
@@ -10,6 +11,8 @@ import balises.FactoryBalise;
 
 public class RecupererBalise {
 
+	public static HashMap<String, String> contenuBaliseTrouvees = new HashMap<String, String>();
+	
     /**
      * Chaque balise ouvrante à l'indice i à pour indice i+1 sa balise fermante
      * ex : <cacher> à l'indice 0 à </cacher> à l'indice 1
@@ -55,11 +58,17 @@ public class RecupererBalise {
                     // la balise est correcte
                     if(balisePotentielle.charAt(1) != '/') {
                         // alors la balise est ouvrante
-                        System.out.println(recupererContenueBalise(ligne, i, indiceTabBalise));
-                        FactoryBalise fB = new FactoryBalise();
-                        Balise c = fB.creerBalise("cacher", recupererContenueBalise(ligne, i, indiceTabBalise));
-                        c.appliquerModif();
-                        System.out.println(c.toString());
+                    	
+                    	/* par ex: <cacher> | son contenue */       	
+                    	contenuBaliseTrouvees.put(balisePotentielle, recupererContenueBalise(ligne, i, indiceTabBalise));
+                    	
+                    	
+//                    	  System.out.println(balisePotencielle);
+//                        System.out.println(recupererContenueBalise(ligne, i, indiceTabBalise));
+//                        FactoryBalise fB = new FactoryBalise();
+//                        Balise c = fB.creerBalise("cacher", recupererContenueBalise(ligne, i, indiceTabBalise));
+//                        c.appliquerModif();
+//                        System.out.println(c.toString());
                     }
                 }
             }

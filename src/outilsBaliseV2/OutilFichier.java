@@ -25,7 +25,7 @@ public class OutilFichier {
      * Remet en forme le fichier source
      * @param fichierSource fichier a remettre en forme
      */
-    public static void corrigeFichier(String fichierSource) {
+    public static void formatterFichier(String fichierSource) {
         String ligne; // ligne utile du fichier content
         StringBuilder aEcrire = new StringBuilder();
         
@@ -69,7 +69,6 @@ public class OutilFichier {
             while ((ligne = fichier.readLine()) != null) {
                 if (Balise.baliseValide(ligne) != -1) {
                     balise.append(ligne);
-                    
                 }
             }
             
@@ -95,7 +94,7 @@ public class OutilFichier {
      * @param args
      */
     public static void main(String[] args) {
-        corrigeFichier("content.xml");
+        formatterFichier("src/outilsBaliseV2/content.xml");
         lectureFichier("ecris.txt");
     }
 }

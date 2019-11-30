@@ -26,6 +26,7 @@ public class TestRecupererBalise {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		testRecupererContenueBalise();
+		//testRecupererContenueBalise();
+		RecupererBalise.recupererFichier(FICHIER_TEST_GENERAL);
 	}
 }

@@ -79,9 +79,7 @@ public class OutilsBaliseV2 {
 						pile.add(balisePotentielle);
 					}
 				}
-				
 			}
-			
 		}
 		return pile.size();
 	}
