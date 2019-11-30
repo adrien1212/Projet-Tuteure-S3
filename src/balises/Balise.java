@@ -64,6 +64,5 @@ public interface Balise {
      */
     public static int baliseValide(String balise) {
         return BALISE.indexOf(balise);
-        
     }
 }

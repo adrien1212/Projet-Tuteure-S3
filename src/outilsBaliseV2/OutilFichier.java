@@ -27,7 +27,7 @@ public class OutilFichier {
      */
     public static void corrigeFichier(String fichierSource) {
         String ligne; // ligne utile du fichier content
-        StringBuilder aEcrire = new StringBuilder();
+        StringBuilder aEcrire = new StringBuilder(); // a ecrire dans le fichier
         
         /* ouverture du fichier */
         try(BufferedReader fichier = new BufferedReader(
@@ -40,9 +40,15 @@ public class OutilFichier {
 
             /* ecriture du fichier */
             for (int i = 0; i < ligne.length(); i++) {
-                aEcrire.append(ligne.charAt(i));
-                if (ligne.charAt(i) == '>' || ligne.charAt(i) == '<') {
+                
+                if (ligne.charAt(i) == '>') {
+                    aEcrire.append(ligne.charAt(i));
                     aEcrire.append("\n");
+                } else if (0 < i && ligne.charAt(i) == '<' && ligne.charAt(i-1) != '>') {
+                    aEcrire.append("\n");
+                    aEcrire.append(ligne.charAt(i));
+                } else {
+                    aEcrire.append(ligne.charAt(i));
                 }
             }
             
@@ -63,13 +69,26 @@ public class OutilFichier {
         String ligne; // ligne lu dans le fichier
         StringBuilder balise = new StringBuilder();
         
+        int indiceBalise; // indice de la balise rencontré dans la collection BALISE
+        
         try(BufferedReader fichier = new BufferedReader(
                                      new FileReader(fichierSource))) {
             
             while ((ligne = fichier.readLine()) != null) {
-                if (Balise.baliseValide(ligne) != -1) {
-                    balise.append(ligne);
+                if ((indiceBalise = Balise.baliseValide(ligne)) != -1 && indiceBalise % 2 == 0) {
                     
+                    ligne = fichier.readLine(); // on saute la ligne de la balise valide
+                    fichier.mark(0);            // on marque la position pour y revenir
+                    
+                    /* lecture du contenu entre les balises */
+                    do {
+                        balise.append(ligne);
+                    } while (!(ligne = fichier.readLine()).equals(Balise.BALISE.get(indiceBalise+1)));
+                    
+                    System.out.println(balise.toString()); // TODO traitement balise
+                    balise.delete(0, balise.length());
+                    
+                    fichier.reset(); // retour a la marque
                 }
             }
             
@@ -95,7 +114,7 @@ public class OutilFichier {
      * @param args
      */
     public static void main(String[] args) {
-        corrigeFichier("content.xml");
+        //corrigeFichier("content.xml");
         lectureFichier("ecris.txt");
     }
 }
