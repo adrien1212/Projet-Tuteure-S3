@@ -49,9 +49,9 @@ public class RecupererBalise {
                 /* On construit une chaine de caractère jusqu'au chevron fermant : '>' 
                  * ex : <à construire>
                  */
-                balisePotentielle = OutilsBaliseV2.contruireBalise(ligne, i);
+                balisePotentielle = VerifierFichier.contruireBalise(ligne, i);
 
-                if((indiceTabBalise = OutilsBaliseV2.estPresent(BALISE_SYNTAXE, balisePotentielle)) != -1) {
+                if((indiceTabBalise = VerifierFichier.estPresent(BALISE_SYNTAXE, balisePotentielle)) != -1) {
                     // la balise est correcte
                     if(balisePotentielle.charAt(1) != '/') {
                         // alors la balise est ouvrante

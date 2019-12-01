@@ -5,10 +5,12 @@
 package outilsBaliseV2;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -17,9 +19,7 @@ import balises.Balise;
 import balises.FactoryBalise;
 
 /**
- * 
  * @author groupe 8
- *
  */
 public class OutilFichier {
 
@@ -35,10 +35,10 @@ public class OutilFichier {
         StringBuilder aEcrire = new StringBuilder(); // a ecrire dans le fichier
         
         /* ouverture du fichier */
-        try(BufferedReader fichier = new BufferedReader(
-                                     new FileReader(fichierSource))) {
+        try(BufferedReader fichier = new BufferedReader(new InputStreamReader( 
+				new FileInputStream(fichierSource), "UTF-8"))) {
             
-            PrintWriter ecris = new PrintWriter(new FileWriter("ecris.txt"));
+            PrintWriter ecris = new PrintWriter("ecris.txt", "UTF-8");
         	//PrintWriter ecris = new PrintWriter(new FileWriter("ecris.txt"));
             
             ecris.println(fichier.readLine()); // La première ligne permettra la re-écriture
@@ -49,8 +49,6 @@ public class OutilFichier {
              */
             ligne = ligne.replaceAll("&lt;", "<");
             ligne = ligne.replaceAll("&gt;", ">");
-            
-            ligne = ligne.replaceAll("â—?", "e");
             
 
             for (int i = 0; i < ligne.length(); i++) {
@@ -83,35 +81,47 @@ public class OutilFichier {
         String ligne; // ligne lu dans le fichier
         StringBuilder balise = new StringBuilder();
         
-        int indiceBalise; // indice de la balise rencontré dans la collection BALISE
+        int indiceBalise;  // indice de la balise rencontré dans la collection BALISE
         
-        try(BufferedReader fichier = new BufferedReader(
-                                     new FileReader(fichierSource))) {
+        int nbBaliseImbric; // nombre de balise personnaliser rencontrer dans le contenu
+        int idBaliseImbric; // indice de la balise rencontre dans le contenu
+        
+        try(BufferedReader fichier = new BufferedReader(new InputStreamReader( 
+				new FileInputStream(fichierSource), "UTF-8"))) {
 
             while ((ligne = fichier.readLine()) != null) {
-            	System.out.println(ligne);
                 if ((indiceBalise = Balise.baliseValide(ligne)) != -1 && indiceBalise % 2 == 0) {
-                	
+                    
                     ligne = fichier.readLine(); // on saute la ligne de la balise valide
                     fichier.mark(0);            // on marque la position pour y revenir
                     
                     /* lecture du contenu entre les balises */
+                    nbBaliseImbric = 0;
                     do {
+                        idBaliseImbric = Balise.baliseValide(ligne);
+                        
+                        /* detection d'une balise ouvrante personnalise */
+                        if (idBaliseImbric != -1 && idBaliseImbric % 2 == 0) {
+                            nbBaliseImbric++; 
+                        /* detection d'une balise fermante */
+                        } else if (idBaliseImbric != -1 && idBaliseImbric % 2 == 1) {
+                            nbBaliseImbric--;
+                        }
+                        
                         balise.append(ligne);
-                    } while (!(ligne = fichier.readLine()).equals(Balise.BALISE.get(indiceBalise+1)));
-                    
-                    System.out.println(balise.toString()); // TODO traitement balise
+                        
+                    } while (!(ligne = fichier.readLine()).equals(Balise.BALISE.get(indiceBalise+1)) || nbBaliseImbric != 0);
                     
                     /* On applique les modifications souhaitées à la balise */
                     FactoryBalise fb = new FactoryBalise();
-                    Balise c = fb.creerBalise("cacher", balise.toString());
+                    Balise c = fb.creerBalise("cacher", balise.toString()); // TODO modif
                     c.appliquerModif();
-                    System.out.println(c.toString());
                     
                     contenuBaliseModifie.add(c.toString());
                    
-                    balise.delete(0, balise.length());
+                    System.out.println(balise.toString());
                     
+                    balise.delete(0, balise.length()); // vider le tampon
                     fichier.reset(); // retour a la marque
                 }
             }
@@ -140,8 +150,10 @@ public class OutilFichier {
      */
     public static void ecrireFichier(String fichierSource, String fichierDestination) throws IOException {
         
-    	BufferedReader fSource = new BufferedReader(new FileReader(fichierSource));
-    	PrintWriter fDestination = new PrintWriter(new FileWriter("content2.xml"));
+    	BufferedReader fSource =  new BufferedReader(new InputStreamReader( 
+										new FileInputStream(fichierSource), "UTF-8"));
+        		
+    	PrintWriter fDestination = new PrintWriter("content2.xml", "UTF-8");
     	
     	String ligne;
     	int i = 0; // indice dans l'arrayList contenuBaliseModifie
@@ -168,16 +180,16 @@ public class OutilFichier {
     
     
     /**
-     * TODO commenter le rôle de cette méthode
-     * @param args
+     * Main de test
+     * @param args inutilise
      */
     public static void main(String[] args) {
-        corrigeFichier("content.xml");
-        lectureFichier("ecris.txt");
-        try {
+        //corrigeFichier("content.xml");
+        lectureFichier("touchepasCaubel.txt");
+        /*try {
 			ecrireFichier("ecris.txt", "content2.xml");
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
     }
 }

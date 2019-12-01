@@ -7,11 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import outilsBaliseV2.OutilsBaliseV2;
+import outilsBaliseV2.VerifierFichier;
 
 public class TestOutilsBalise {
 
-	public static final String FICHIER_TEST_GENERAL = "src/outilsBaliseV2/fichierTestGeneral";
+	public static final String FICHIER_TEST_GENERAL = "src/tests/fichierTestGeneral";
 	
 	
 	/** Tests unitaires de la méthode construireBalise*/
@@ -46,11 +46,11 @@ public class TestOutilsBalise {
 		
 		System.out.println("\n *** Test construireBalise *** \n");
 		for(int i = 0; i < tabLigne.length; i++) {
-			if(OutilsBaliseV2.contruireBalise(tabLigne[i][0], positionChevron[i]).equals(resultat[i][0])) {
+			if(VerifierFichier.contruireBalise(tabLigne[i][0], positionChevron[i]).equals(resultat[i][0])) {
 				nbSucces++;
 			} else {
 				System.out.println("Test " + i+1 + " pas passé");
-				System.out.println("Résultat obtenue : " + OutilsBaliseV2.contruireBalise(tabLigne[i][0], positionChevron[i]));
+				System.out.println("Résultat obtenue : " + VerifierFichier.contruireBalise(tabLigne[i][0], positionChevron[i]));
 			}
 		}
 		
@@ -79,7 +79,7 @@ public class TestOutilsBalise {
 		/* Pour chaque ligne du fichier, on regarde la hauteur de la pile */
 		System.out.println("\n *** Test recupererBalisePresente *** \n");
 		for(int i = 0; (ligne = bf.readLine()) != null; i++) {
-			hauteurRecupere = OutilsBaliseV2.recupererBalisePresente(ligne);
+			hauteurRecupere = VerifierFichier.recupererBalisePresente(ligne);
 			if(hauteurTherorique[i] != hauteurRecupere) {
 				nbEchecs++;
 				System.out.println("Echec test : " + i);
@@ -106,13 +106,13 @@ public class TestOutilsBalise {
 		/* Test avec balises correctes */
 		System.out.println("\n *** Test verifierBalise avec balises correctes *** \n");
 		for(int i = 0; (ligne = bf.readLine()) != null && i < 6; i++) {
-			pw = new PrintWriter(new FileWriter("src/outilsBaliseV2/fichierGenere"));
+			pw = new PrintWriter(new FileWriter("src/tests/fichierGenere"));
 			pw.println("ligne 1");
 			pw.print(ligne);
 			pw.close();
 			
 			/* On exécute les tests */
-			if(!OutilsBaliseV2.verifierBalise("src/outilsBaliseV2/fichierGenere")) {
+			if(!VerifierFichier.verifierBalise("src/tests/fichierGenere")) {
 				nbEchec++;
 				System.out.println("Echec test " + i);
 			}
@@ -122,13 +122,13 @@ public class TestOutilsBalise {
 		/* test avec balises incorrectes */
 		System.out.println("\n *** Test verifierBalise avec balises incorrectes *** \n");
 		for(int i = 6; (ligne = bf.readLine()) != null; i++) {
-			pw = new PrintWriter(new FileWriter("src/outilsBaliseV2/fichierGenere"));
+			pw = new PrintWriter(new FileWriter("src/tests/fichierGenere"));
 			pw.println("ligne 1");
 			pw.print(ligne);
 			pw.close();
 			
 			/* On exécute les tests */
-			if(OutilsBaliseV2.verifierBalise("src/outilsBaliseV2/fichierGenere")) {
+			if(VerifierFichier.verifierBalise("src/tests/fichierGenere")) {
 				nbEchec++;
 				System.out.println("Echec test " + i);
 			}

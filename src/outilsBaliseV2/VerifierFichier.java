@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import balises.Cacher;
 
-public class OutilsBaliseV2 {
+public class VerifierFichier {
 
 	/** 
 	 * Tableau où sont stocker les balises utilisées
@@ -38,6 +38,9 @@ public class OutilsBaliseV2 {
 		
 		if(recupererBalisePresente(ligne) == 0) {
 			estFichierCorrect = true;
+			System.out.println("Fichier correct");
+		} else {
+			System.out.println("Fichier incorrect, toute les balises ouvrantes ne sont pas fermées");
 		}
 		
 		return estFichierCorrect;

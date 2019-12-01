@@ -12,7 +12,7 @@ public class testGeneral {
 		 */
 		FactoryBalise fB = new FactoryBalise();
 		
-		OutilsBaliseV2.verifierBalise("src/test/fichTest.txt");
+		VerifierFichier.verifierBalise("src/test/fichTest.txt");
 		
 		RecupererBalise.recupererFichier("src/test/fichTest.txt");
 		
