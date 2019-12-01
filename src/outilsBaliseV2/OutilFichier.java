@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import balises.Balise;
@@ -38,6 +39,7 @@ public class OutilFichier {
                                      new FileReader(fichierSource))) {
             
             PrintWriter ecris = new PrintWriter(new FileWriter("ecris.txt"));
+        	//PrintWriter ecris = new PrintWriter(new FileWriter("ecris.txt"));
             
             ecris.println(fichier.readLine()); // La première ligne permettra la re-écriture
             ligne = fichier.readLine();
@@ -48,7 +50,7 @@ public class OutilFichier {
             ligne = ligne.replaceAll("&lt;", "<");
             ligne = ligne.replaceAll("&gt;", ">");
             
-            //ligne = ligne.replaceAll("â—?", "pointBizzar");
+            ligne = ligne.replaceAll("â—?", "e");
             
 
             for (int i = 0; i < ligne.length(); i++) {
@@ -87,6 +89,7 @@ public class OutilFichier {
                                      new FileReader(fichierSource))) {
 
             while ((ligne = fichier.readLine()) != null) {
+            	System.out.println(ligne);
                 if ((indiceBalise = Balise.baliseValide(ligne)) != -1 && indiceBalise % 2 == 0) {
                 	
                     ligne = fichier.readLine(); // on saute la ligne de la balise valide
@@ -138,7 +141,7 @@ public class OutilFichier {
     public static void ecrireFichier(String fichierSource, String fichierDestination) throws IOException {
         
     	BufferedReader fSource = new BufferedReader(new FileReader(fichierSource));
-    	PrintWriter fDestination = new PrintWriter(new FileWriter(fichierDestination));
+    	PrintWriter fDestination = new PrintWriter(new FileWriter("content2.xml"));
     	
     	String ligne;
     	int i = 0; // indice dans l'arrayList contenuBaliseModifie
