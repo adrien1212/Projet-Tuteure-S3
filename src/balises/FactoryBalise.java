@@ -14,12 +14,9 @@ import balises.Balise;
  */
 public class FactoryBalise {
 
-    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
     HashMap<String, Balise> baliseTypes = new HashMap<String, Balise>();
 
-    /**
-     * TODO commenter l'état initial défini
-     */
+    
     public FactoryBalise() {
         baliseTypes.put("cacher", new Cacher());
     }
@@ -32,7 +29,6 @@ public class FactoryBalise {
      */
     public Balise creerBalise(String balise, String contenuBalise) {
         Balise b = baliseTypes.get(balise); // on récupère un objet associé au type
-
         return b.creerBalise(contenuBalise); // on applique la bonne méthode (polymorphisme)
     }
 }

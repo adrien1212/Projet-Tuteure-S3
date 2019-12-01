@@ -6,24 +6,13 @@ package balises;
  */
 public class Cacher implements Balise {
 
-    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
     public static final String SYNTAXE_OUVERTURE = "<cacher>";
 
-    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
     public static final String SYNTAXE_FERMETURE = "</cacher>";
 
-    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
     private String contenu;
 
-    /**
-     * TODO commenter l'état initial défini
-     * @param contenu contenu de la balise
-     */
-    public Balise creerBalise(String contenu) {
-    	Cacher c = new Cacher(contenu);
-    	return c;
-    }
-
+    
     /**
      * Constructeur par defaut
      */
@@ -37,6 +26,14 @@ public class Cacher implements Balise {
      */
     public Cacher(String contenu) {
         this.contenu = contenu;
+    }
+    
+    /**
+     * @param contenu contenu de la balise
+     */
+    public Balise creerBalise(String contenu) {
+    	Cacher c = new Cacher(contenu);
+    	return c;
     }
     
     /**

@@ -17,19 +17,16 @@
 <style:style style:name="dp2" style:family="drawing-page">
 <style:drawing-page-properties presentation:display-header="true" presentation:display-footer="true" presentation:display-page-number="false" presentation:display-date-time="true"/>
 </style:style>
-<style:style style:name="gr1" style:family="graphic" style:parent-style-name="standard">
-<style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" draw:auto-grow-height="true" draw:auto-grow-width="false" fo:max-height="0cm" fo:min-height="0cm"/>
-</style:style>
-<style:style style:name="gr2" style:family="graphic">
+<style:style style:name="gr1" style:family="graphic">
 <style:graphic-properties style:protect="size"/>
 </style:style>
-<style:style style:name="pr1" style:family="presentation" style:parent-style-name="Standard-notes">
+<style:style style:name="pr1" style:family="presentation" style:parent-style-name="Standard-subtitle">
+<style:graphic-properties draw:fill-color="#ffffff" fo:min-height="9.134cm"/>
+</style:style>
+<style:style style:name="pr2" style:family="presentation" style:parent-style-name="Standard-notes">
 <style:graphic-properties draw:fill-color="#ffffff" fo:min-height="13.364cm"/>
 </style:style>
 <style:style style:name="P1" style:family="paragraph">
-<loext:graphic-properties draw:fill="none" draw:fill-color="#ffffff"/>
-</style:style>
-<style:style style:name="P2" style:family="paragraph">
 <loext:graphic-properties draw:fill-color="#ffffff"/>
 </style:style>
 <text:list-style style:name="L1">
@@ -78,16 +75,20 @@
 <office:body>
 <office:presentation>
 <draw:page draw:name="page1" draw:style-name="dp1" draw:master-page-name="Standard" presentation:presentation-page-layout-name="AL1T0">
-<draw:frame draw:style-name="gr1" draw:text-style-name="P1" draw:layer="layout" svg:width="15.8cm" svg:height="0.962cm" svg:x="6.2cm" svg:y="3.2cm">
+<draw:frame presentation:style-name="pr1" draw:text-style-name="P1" draw:layer="layout" svg:width="25.199cm" svg:height="9.134cm" svg:x="1.4cm" svg:y="3.685cm" presentation:class="subtitle">
 <draw:text-box>
 <text:p>
-aaaaaaa
+Le texte qui suit va devoir être caché
+<cacher>
+Texte à cacher
+</cacher>
+, le texte a été caché.
 </text:p>
 </draw:text-box>
 </draw:frame>
 <presentation:notes draw:style-name="dp2">
-<draw:page-thumbnail draw:style-name="gr2" draw:layer="layout" svg:width="19.798cm" svg:height="11.136cm" svg:x="0.6cm" svg:y="2.257cm" draw:page-number="1" presentation:class="page"/>
-<draw:frame presentation:style-name="pr1" draw:text-style-name="P2" draw:layer="layout" svg:width="16.799cm" svg:height="13.364cm" svg:x="2.1cm" svg:y="14.107cm" presentation:class="notes" presentation:placeholder="true">
+<draw:page-thumbnail draw:style-name="gr1" draw:layer="layout" svg:width="19.798cm" svg:height="11.136cm" svg:x="0.6cm" svg:y="2.257cm" draw:page-number="1" presentation:class="page"/>
+<draw:frame presentation:style-name="pr2" draw:text-style-name="P1" draw:layer="layout" svg:width="16.799cm" svg:height="13.364cm" svg:x="2.1cm" svg:y="14.107cm" presentation:class="notes" presentation:placeholder="true">
 <draw:text-box/>
 </draw:frame>
 </presentation:notes>

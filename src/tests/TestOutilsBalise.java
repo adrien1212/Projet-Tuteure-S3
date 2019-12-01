@@ -1,4 +1,4 @@
-package outilsBaliseV2;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

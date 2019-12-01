@@ -1,2 +1,0 @@
-première ligne à mettre
-<cacher>Bonjour</cacher>
