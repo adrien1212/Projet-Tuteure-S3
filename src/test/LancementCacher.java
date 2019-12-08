@@ -22,8 +22,5 @@ public class LancementCacher {
 			
 			OutilFichier.ecrireFichier("ecris.txt", "content2.xml");
 		}
-		
-		
 	}
-
 }

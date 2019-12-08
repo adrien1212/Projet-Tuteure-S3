@@ -7,12 +7,9 @@ package outilsBaliseV2;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import balises.Balise;
@@ -137,15 +134,8 @@ public class OutilFichier {
     
     /**
      * TODO commenter le rôle de cette méthode
-     * @param collectionBalise
-     */
-    public static void ecrireFichier(ArrayList<Balise> collectionBalise) {
-    }
-    
-    
-    /**
-     * TODO commenter le rôle de cette méthode
-     * @param collectionBalise
+     * @param fichierSource 
+     * @param fichierDestination 
      * @throws IOException 
      */
     public static void ecrireFichier(String fichierSource, String fichierDestination) throws IOException {
