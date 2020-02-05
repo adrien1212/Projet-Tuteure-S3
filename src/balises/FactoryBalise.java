@@ -7,6 +7,7 @@ package balises;
 import java.util.HashMap;
 
 import balises.Balise;
+import balises.types.Cacher;
 
 /**
  * Design pattern factory permettant la création de differentes balise
@@ -14,11 +15,14 @@ import balises.Balise;
  */
 public class FactoryBalise {
 
+    /** Contient les informations sur les balises*/
     HashMap<String, Balise> baliseTypes = new HashMap<String, Balise>();
 
-    
+    /**
+     * Permet d'ajouter les balises qu'on va utiliser
+     */
     public FactoryBalise() {
-        baliseTypes.put("cacher", new Cacher());
+        baliseTypes.put("0", new Cacher());
     }
 
     /**

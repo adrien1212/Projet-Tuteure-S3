@@ -7,6 +7,8 @@ package balises;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import balises.types.*;
+
 /**
  * Classe parente de toutes les balises
  * @author groupe 8
@@ -15,6 +17,9 @@ public interface Balise {
     
     /** Collection contenant toutes les balises */
     public static ArrayList<String> BALISE = initCollection();
+    
+    /** Collection contenant toutes les balises ouvrantes */
+    public static ArrayList<String> BALISE_OUVRANTE = initCollectionBaliseOuvrante();
     
     /** Syntaxe de la balise ouvrante */
     public static final String SYNTAXE_OUVERTURE = null;
@@ -32,9 +37,9 @@ public interface Balise {
     public void appliquerModif();
 
     /**
-     * TODO commenter le rôle de cette méthode
-     * @param contenuBalise
-     * @return 
+     * Construit une balise avec son contenu
+     * @param contenuBalise écrit dans entre la balise
+     * @return la balise
      */
     public abstract Balise creerBalise(String contenuBalise);
     
@@ -45,12 +50,33 @@ public interface Balise {
     public static ArrayList<String> initCollection() {
         ArrayList<String> aRetourne = new ArrayList<String>();
         
+        /* Ensemble des balises */
         String[] balise = {Cacher.SYNTAXE_OUVERTURE, Cacher.SYNTAXE_FERMETURE,
-                           Taille.SYNTAXE_OUVERTURE, Taille.SYNTAXE_FERMETURE};
+                           Taille.SYNTAXE_OUVERTURE, Taille.SYNTAXE_FERMETURE,
+                           Gras.SYNTAXE_OUVERTURE, Gras.SYNTAXE_FERMETURE
+                           };
         
         aRetourne.addAll(Arrays.asList(balise));
         return aRetourne;
     }
+    
+    /**
+     * Initialise la collection avec les balises ouvrante seulement
+     * @return aRetourne collection contenant les balises ouvrantes
+     */
+    public static ArrayList<String> initCollectionBaliseOuvrante() {
+    	ArrayList<String> aRetourne = new ArrayList<String>();
+        
+        /* Ensemble des balises */
+        String[] balise = {Cacher.SYNTAXE_OUVERTURE,
+                           Taille.SYNTAXE_OUVERTURE, 
+                           Gras.SYNTAXE_OUVERTURE, 
+                           };
+        
+        aRetourne.addAll(Arrays.asList(balise));
+        return aRetourne;
+    }
+    
 
     /** @return le contenu entre les balise */
     public default String getContenu() {
