@@ -4,7 +4,7 @@ Nous devons créer une application qui a partir d'un document source Libre Offic
 Ainsi, l'utilisateur pourra créer des textes à trous (en remplacent de texte d'origine par des pointillés).
 
 ## Consulter le cachier des charges
-Disponible dans le dossier [application](application)
+Disponible dans le dossier [application](application/S3_Cahier_des _charges final.pdf)
 
 ## Télécharger l'application Variante.exe
 Disponible dans le dossier [application](application)
