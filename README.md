@@ -4,8 +4,8 @@ Nous devons créer une application qui a partir d'un document source Libre Offic
 Ainsi, l'utilisateur pourra créer des textes à trous (en remplacent de texte d'origine par des pointillés).
 
 ## Consulter le cachier des charges
-Disponible dans le dossier application
+Disponible dans le dossier [application](application)
 
 ## Télécharger l'application Variante.exe
-Disponible dans le dossier application
-[This is a relative link to a nested file](application/Variante.exe)
+Disponible dans le dossier [application](application)
+
