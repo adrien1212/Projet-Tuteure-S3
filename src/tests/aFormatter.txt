@@ -1,2 +1,0 @@
-Première ligne inutile
-<cacher>texte</cacher><cacher>autre</cacher>
